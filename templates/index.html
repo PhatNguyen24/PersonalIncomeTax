@@ -7,15 +7,26 @@ Tính BHXH, BHYT, BHTN, Thuế thu nhập, lương net
 
 {% block content %}
 <div class="container">
-    <h2>Tính BHXH, BHYT, BHTN, Thuế thu nhập, lương net</h2>
-    <form method="POST" action="/">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Trang chủ</a>
+        <div class="ml-auto">
+            <a class="navbar-brand" href="/register">Đăng ký</a>
+            <a class="navbar-brand" href="/logout">Đăng xuất</a>
+        </div>
+    </nav>
+
+    <h2>Khai thuế</h2>
+    <form method="POST" action="/" id="taxForm">
         <dl>
             {{ form.csrf_token }}
+            {{ wtf.form_field(form.codeorpay) }}
+            {{ wtf.form_field(form.nameorpay) }}
             {{ wtf.form_field(form.gross) }}
             {{ wtf.form_field(form.contract) }}
             {{ wtf.form_field(form.dependant) }}
             {{ wtf.form_field(form.region) }}
-            <input class="btn btn-primary" type="submit" value="Submit">
+            <input class="btn btn-primary" type="submit" value="Tính thuế">
+            <input class="btn btn-primary" id="submitButton" type="submit" value="Nộp thuế"></input>
         </dl>
     </form>
     <hr>
@@ -32,15 +43,15 @@ Tính BHXH, BHYT, BHTN, Thuế thu nhập, lương net
             </tbody>
         </table>
     </div>
-
+    
     <div class="MoreInfo">  
         <hr>
         <p></p>
-        <h4>Thông tin tỉ lệ đóng BHXH, BHYT, BHTN (2024)</h4>
+        <h4>Thông tin tỉ lệ đóng BHXH, BHYT, BHTN (2019)</h4>
         <p>BHXH: 8% (không quá 20 lần mức lương cơ sở).</p>
         <p>BHYT: 1.5% (không quá 20 lần mức lương cơ sở).</p>
         <p>BHTN: 1% (không quá 20 lần mức lương tối thiểu vùng).</p>
-        <p>Lương cơ sở: 1.800.000  đồng/tháng (từ ngày 01/01/2024)</p>
+        <p>Lương cơ sở: 1.490.000 đồng/tháng (từ 01/07/2019)</p>
         <p>Lương tối thiếu theo vùng:</p>
         <p>- Vùng I: 4.180.000 đồng/tháng (Hà Nội, Quảng Ninh, Đà Nẵng, Tp.HCM, Bình Dương, Đồng Nai, Vũng Tàu.)</p>
         <p>- Vùng II: 3.710.000 đồng/tháng (Hải Phòng, Vĩnh Phúc, Thái Nguyên, Khánh Hoà, Bình Phước, Tây Ninh, Long An, An Giang, Cần Thơ, Cà Mau.)</p>
@@ -97,4 +108,16 @@ Tính BHXH, BHYT, BHTN, Thuế thu nhập, lương net
         </table>
     </div>
 </div>
+
+<script>
+document.getElementById("submitButton").onclick = function(event) {
+    var codeorpay = document.querySelector("[name='codeorpay']").value.trim();
+    var nameorpay = document.querySelector("[name='nameorpay']").value.trim();
+    
+    if (!codeorpay || !nameorpay) {
+        alert("Vui lòng điền mã tổ chức thu nhập và tên tổ chức trả thu nhập.");
+        event.preventDefault();
+    }
+};
+</script>
 {% endblock %}

@@ -1,12 +1,5 @@
 __version__ = "1.0"
 
-"""
-Personal Income Tax Calculator
-Author: Anh Hong
-File Name: pit.py
-
-"""
-
 base_salary = 1800000
 minimum_salary_region1 = 4680000
 minimum_salary_region2 = 4160000
@@ -16,7 +9,7 @@ social_insurance_rate = 0.08
 health_insurance_rate = 0.015     
 unemployment_rate = 0.01
 personal_deduction = 11000000
-dependant_deduction = 4400000
+dependant_deduction = 3600000
 pit_lv1 = 5000000
 pit_lv1_rate = 0.05
 pit_lv2 = 10000000
@@ -95,10 +88,7 @@ class PersonalMonthlyIncome():
         return self.dependant*dependant_deduction
 
     def taxable_income(self):
-        taxableIncome =  (self.gross)-(self.social_insurance() + self.health_insurance() + self.unemployment() + self.personal_deduction() + self.dependant_deduction())
-        if taxableIncome < 0:
-            return 0
-        return taxableIncome
+        return (self.gross)-(self.social_insurance() + self.health_insurance() + self.unemployment() + self.personal_deduction() + self.dependant_deduction())
     
     def personal_income_tax(self):
         tax = 0        

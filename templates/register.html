@@ -1,0 +1,26 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Đăng kí
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Đăng kí</h2>
+    <form method="POST" action="/register">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.taxcode) }}
+        {{ wtf.form_field(form.username) }}
+        {{ wtf.form_field(form.password) }}
+        {{ wtf.form_field(form.email) }}
+        {{ wtf.form_field(form.birth_date) }}
+        {{ wtf.form_field(form.gender) }}
+        {{ wtf.form_field(form.document_type) }}
+        {{ wtf.form_field(form.document_number) }}
+        {{ wtf.form_field(form.phone_number) }}
+        
+        <input class="btn btn-primary" type="submit" value="Đăng kí">
+    </form>
+</div>
+{% endblock %}
