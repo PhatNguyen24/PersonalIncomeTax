@@ -32,7 +32,7 @@ def place_value(number):
     return ("{:,}".format(number)) 
 
 class PITForm(Form):
-    codeorpay = StringField('Mã tổ chức thu nhập (0313399907)')
+    codeorpay = StringField('Mã tổ chức thu nhập')
     nameorpay = StringField('Tên tổ chức trả thu nhập')
     gross = StringField('Thu nhập hàng tháng (lương, các khoản phụ cấp, làm ngoài giờ...)', validators=[InputRequired()], default=0)
     contract = StringField('Lương hợp đồng (căn cứ đóng bảo hiểm)', validators=[InputRequired()], default=0)
