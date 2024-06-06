@@ -2,7 +2,7 @@
 
 Công cụ tính thuế thu nhập cá nhân (tạm đóng), bảo hiểm bắt buộc (BHXH, BHYT, BHTN), tiền lương net hàng tháng.
 
-(Áp dụng tỉ lệ đóng bảo hiểm, thuế thu nhập cá nhân trong 2019, mức lương cơ sở, lương tối thiểu theo vùng từ 01/07/2024)
+(Áp dụng tỉ lệ đóng bảo hiểm, thuế thu nhập cá nhân trong 2024, mức lương cơ sở, lương tối thiểu theo vùng từ 01/07/2024)
 
 1. Nhập thông tin thu nhập hàng tháng
    
@@ -14,12 +14,12 @@ Công cụ tính thuế thu nhập cá nhân (tạm đóng), bảo hiểm bắt 
 
 
 ### Thông tin thêm:
-Thông tin tỉ lệ đóng BHXH, BHYT, BHTN (2019)
+Thông tin tỉ lệ đóng BHXH, BHYT, BHTN (2024)
 - BHXH: 8% (không quá 20 lần mức lương cơ sở).
 - BHYT: 1.5% (không quá 20 lần mức lương cơ sở).
 - BHTN: 1% (không quá 20 lần mức lương tối thiểu vùng).
 
-Lương cơ sở: 1.490.000 đồng/tháng (từ 01/07/2019)
+Lương cơ sở: 1.800.000 đồng/tháng (từ 01/07/2024)
 
 Lương tối thiếu theo vùng:
 - Vùng I: 4.680.000 đồng/tháng (Hà Nội, Quảng Ninh, Đà Nẵng, Tp.HCM, Bình Dương, Đồng Nai, Vũng Tàu.)
