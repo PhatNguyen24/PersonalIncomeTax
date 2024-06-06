@@ -17,6 +17,7 @@ app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 
 # User data simulation
 taxcodes = {}
+taxrecords = []
 
 # Decorator for login required
 def login_required(f):
@@ -93,11 +94,14 @@ class RegisterForm(FlaskForm):
 @login_required
 def index():
     form = PITForm()
+    global taxrecords
 
     if request.method == 'GET':
         return render_template('index.html', form=form)
 
     elif request.method == 'POST':
+        codeorpay = request.form.get('codeorpay')
+        nameorpay = request.form.get('nameorpay')
         gross = int(request.form['gross'])
         contract = int(request.form['contract'])
         dependant = int(request.form['dependant'])
@@ -121,8 +125,25 @@ def index():
             {'Name':'Thuế thu nhập cá nhân', 'Value':place_value(income.personal_income_tax())},
             {'Name':'Tiền lương thực nhận (net income)', 'Value':place_value(income.net_income())}
         ]
+        if 'submit_tax' in request.form:
+            record = {
+                'codeorpay': request.form['codeorpay'],
+                'nameorpay': request.form['nameorpay'],
+                'gross': place_value(income.gross),
+                'contract': place_value(income.contract),
+                'dependant': request.form['dependant'],
+                'region': request.form['region'],
+                'social_insurance': place_value(income.social_insurance()),
+                'health_insurance': place_value(income.health_insurance()),
+                'unemployment': place_value(income.unemployment()),
+                'dependant_deduction': place_value(income.dependant_deduction()),
+                'taxable_income': place_value(income.taxable_income()),
+                'personal_income_tax': place_value(income.personal_income_tax()),
+                'net_income': place_value(income.net_income())
+            }
+            taxrecords.append(record)
 
-        return render_template('index.html', data=data, form=form)
+        return render_template('index.html', data=data, form=form, taxrecords=taxrecords)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -162,6 +183,11 @@ def register():
 def logout():
     session.pop('taxcode', None)
     return redirect(url_for('login'))
+
+@app.route('/thongke')
+def thongke():
+    global taxrecords
+    return render_template('thongke.html', taxrecords=taxrecords)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

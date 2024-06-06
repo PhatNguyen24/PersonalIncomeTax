@@ -17,18 +17,17 @@ Tính BHXH, BHYT, BHTN, Thuế thu nhập, lương net
 
     <h2>Khai thuế</h2>
     <form method="POST" action="/" id="taxForm">
-        <dl>
-            {{ form.csrf_token }}
-            {{ wtf.form_field(form.codeorpay) }}
-            {{ wtf.form_field(form.nameorpay) }}
-            {{ wtf.form_field(form.gross) }}
-            {{ wtf.form_field(form.contract) }}
-            {{ wtf.form_field(form.dependant) }}
-            {{ wtf.form_field(form.region) }}
-            <input class="btn btn-primary" type="submit" value="Tính thuế">
-            <input class="btn btn-primary" id="submitButton" type="submit" value="Nộp thuế"></input>
-        </dl>
+        {{ form.csrf_token }}
+        {{ wtf.form_field(form.codeorpay) }}
+        {{ wtf.form_field(form.nameorpay) }}
+        {{ wtf.form_field(form.gross) }}
+        {{ wtf.form_field(form.contract) }}
+        {{ wtf.form_field(form.dependant) }}
+        {{ wtf.form_field(form.region) }}
+        <input class="btn btn-primary" type="submit" value="Tính thuế">
+        <input class="btn btn-primary" id="submitButton" name="submit_tax" type="submit" value="Nộp thuế">
     </form>
+    
     <hr>
     <div class="jumbotron">  
         <h4>Kết quả</h4>      
