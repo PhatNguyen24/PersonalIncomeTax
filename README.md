@@ -2,7 +2,7 @@
 
 Công cụ tính thuế thu nhập cá nhân (tạm đóng), bảo hiểm bắt buộc (BHXH, BHYT, BHTN), tiền lương net hàng tháng.
 
-(Áp dụng tỉ lệ đóng bảo hiểm, thuế thu nhập cá nhân trong 2019, mức lương cơ sở, lương tối thiểu theo vùng từ 01/07/2019)
+(Áp dụng tỉ lệ đóng bảo hiểm, thuế thu nhập cá nhân trong 2019, mức lương cơ sở, lương tối thiểu theo vùng từ 01/07/2024)
 
 1. Nhập thông tin thu nhập hàng tháng
    
@@ -12,21 +12,6 @@ Công cụ tính thuế thu nhập cá nhân (tạm đóng), bảo hiểm bắt 
    
 ![](https://i.imgur.com/IQchPAC.png)
 
-3. Triển khai lên Google App Engine
-
-- Trên Google Cloud, tạo Project mới (lấy thông tin PROJECT_ID)
-- Trên máy dev, clone github repo về.
-- Mở Google Cloud SDK Shell, chuyển về thư mục repo 'pit'
-- Thực hiện deploy lên Google App Engine
-
-```
-gcloud auth application-default login
-gcloud config set project PROJECT_ID
-gcloud app deploy app.yaml
-```
-Lựa chọn các tùy chọn triển khai App Engine theo chỉ dẫn trên màn hình.
-
-Demo app: https://hva-app-pit.appspot.com/
 
 ### Thông tin thêm:
 Thông tin tỉ lệ đóng BHXH, BHYT, BHTN (2019)
@@ -37,10 +22,10 @@ Thông tin tỉ lệ đóng BHXH, BHYT, BHTN (2019)
 Lương cơ sở: 1.490.000 đồng/tháng (từ 01/07/2019)
 
 Lương tối thiếu theo vùng:
-- Vùng I: 4.180.000 đồng/tháng (Hà Nội, Quảng Ninh, Đà Nẵng, Tp.HCM, Bình Dương, Đồng Nai, Vũng Tàu.)
-- Vùng II: 3.710.000 đồng/tháng (Hải Phòng, Vĩnh Phúc, Thái Nguyên, Khánh Hoà, Bình Phước, Tây Ninh, Long An, An Giang, Cần Thơ, Cà Mau.)
-- Vùng III: 3.250.000 đồng/tháng (Hà Tây, Bắc Ninh, Hải Dương, Hưng Yên, Huế, Bình Định, Gia Lai, Đắc Lắc, Lâm Đồng, Ninh Thuận, Bình Thuận, ĐồngTháp, Tiền Giang, Vĩnh Long, Bến Tre, Kiên Giang, Hậu Giang, Sóc Trăng, Bạc Liêu.)
-- Vùng IV: 2.920.000 đồng/tháng (là các tỉnh còn lại.)
+- Vùng I: 4.680.000 đồng/tháng (Hà Nội, Quảng Ninh, Đà Nẵng, Tp.HCM, Bình Dương, Đồng Nai, Vũng Tàu.)
+- Vùng II: 4.160.000 đồng/tháng (Hải Phòng, Vĩnh Phúc, Thái Nguyên, Khánh Hoà, Bình Phước, Tây Ninh, Long An, An Giang, Cần Thơ, Cà Mau.)
+- Vùng III: 3.640.000 đồng/tháng (Hà Tây, Bắc Ninh, Hải Dương, Hưng Yên, Huế, Bình Định, Gia Lai, Đắc Lắc, Lâm Đồng, Ninh Thuận, Bình Thuận, ĐồngTháp, Tiền Giang, Vĩnh Long, Bến Tre, Kiên Giang, Hậu Giang, Sóc Trăng, Bạc Liêu.)
+- Vùng IV: 3.250.000 đồng/tháng (là các tỉnh còn lại.)
 
 Bảng mức thuế thu nhập cá nhân
 
