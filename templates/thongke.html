@@ -24,9 +24,10 @@ Thống kê thuế
                     <th>Thời gian</th>
                     <th>Mã số thuế</th>
                     <th>Họ và tên</th>
+                    <!--  -->
                     <th>Mã tổ chức</th>
                     <th>Tên tổ chức</th>
-                    <th>Thu nhập hàng tháng/th>
+                    <th>Thu nhập hàng tháng</th>
                     <th>Lương hợp đồng</th>
                     <th>Người phụ thuộc</th>
                     <th>Vùng</th>
@@ -44,11 +45,16 @@ Thống kê thuế
                         <td>{{ record.codeorpay }}</td>
                         <td>{{ record.nameorpay }}</td>
                         <td>{{ record.gross }}</td>
+                        <!--  -->
+                        <td>{{ record.codeorpay }}</td>
+                        <td>{{ record.nameorpay }}</td>
+                        <td>{{ record.gross }}</td>
                         <td>{{ record.contract }}</td>
+                        <td>{{ record.dependant }}</td>
+                        <td>{{ record.region }}</td>
                         <td>{{ record.social_insurance }}</td>
                         <td>{{ record.health_insurance }}</td>
                         <td>{{ record.unemployment }}</td>
-                        <td>{{ record.dependant_deduction }}</td>
                         <td>{{ record.taxable_income }}</td>
                         <td>{{ record.personal_income_tax }}</td>
                         <td>{{ record.net_income }}</td>
@@ -57,5 +63,6 @@ Thống kê thuế
             </tbody>
         </table>
     </div>
+    <input type="submit" value="submit">
 </div>
 {% endblock %}
