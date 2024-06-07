@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from flask import Flask, render_template, request, jsonify, make_response, session, redirect, url_for
+from flask import Flask, render_template, request, jsonify, make_response, session, redirect, url_for, send_file
 from flask_wtf import Form
 from wtforms import StringField, SelectField, PasswordField, IntegerField, DateField, RadioField
 from wtforms.validators import InputRequired, Email, Length, Regexp
@@ -7,7 +7,9 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from pit import * 
 from functools import wraps
-
+import pandas as pd
+from io import BytesIO
+from datetime import datetime
 
 DEBUG = True
 app = Flask(__name__)
@@ -47,23 +49,9 @@ class PITForm(Form):
             ('4', 'Vùng 4 các tỉnh còn lại.')]
     )
 
-
 class LoginForm(FlaskForm):
-
     taxcode = StringField('Mã số thuế', validators=[InputRequired(), Length(max=10)])
     password = PasswordField('Mật khẩu', validators=[InputRequired(), Length(min=8, max=80)])
-    
-    
-#     Mã số thuế
-# Tên cá nhân
-# Ngày sinh
-# Giới tính
-# Loại giấy tờ Chứng minh thư nhân dân, căn cước công dân, hộ chiếu
-# Số giấy tờ
-# Số điện thoại
-# Email
-# Mật khẩu
-
 
 class RegisterForm(FlaskForm):
     taxcode = StringField('Mã số thuế', validators=[InputRequired(), Length(max=10)])
@@ -87,7 +75,6 @@ class RegisterForm(FlaskForm):
         Length(max=10, message="Số điện thoại không được quá 10 chữ số"),
         Regexp('^[0-9]*$', message="Số điện thoại chỉ được chứa các chữ số")
     ])
-
 
 @app.route('/index')
 @app.route('/', methods=['GET', 'POST'])
@@ -145,36 +132,55 @@ def index():
 
         return render_template('index.html', data=data, form=form, taxrecords=taxrecords)
 
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
 
-    if request.method == 'POST' and form.validate():
-        taxcode = form.taxcode.data
-        password = form.password.data
+    if request.method == 'GET':
+        return render_template('login.html', form=form)
 
-        if taxcode in taxcodes and taxcodes[taxcode] == password:
+    elif request.method == 'POST':
+        taxcode = request.form.get('taxcode')
+        password = request.form.get('password')
+
+        if taxcode in taxcodes and taxcodes[taxcode]['password'] == password:
             session['taxcode'] = taxcode
             return redirect(url_for('index'))
-        else:
-            return '<h1>Invalid taxcode or password</h1>'
 
-    return render_template('login.html', form=form)
+        return '<h1>Invalid taxcode or password</h1>'
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
 
-    if request.method == 'POST' and form.validate():
-        taxcode = form.taxcode.data
-        password = form.password.data
+    if request.method == 'GET':
+        return render_template('register.html', form=form)
+
+    elif request.method == 'POST':
+        taxcode = request.form.get('taxcode')
+        username = request.form.get('username')
+        password = request.form.get('password')
+        email = request.form.get('email')
+        birth_date = request.form.get('birth_date')
+        gender = request.form.get('gender')
+        document_type = request.form.get('document_type')
+        document_number = request.form.get('document_number')
+        phone_number = request.form.get('phone_number')
 
         if taxcode not in taxcodes:
-            taxcodes[taxcode] = password
+            taxcodes[taxcode] = {
+                'username': username,
+                'password': password,
+                'email': email,
+                'birth_date': birth_date,
+                'gender': gender,
+                'document_type': document_type,
+                'document_number': document_number,
+                'phone_number': phone_number
+            }
             return redirect(url_for('login'))
-        else:
-            return '<h1>Taxcode already exists</h1>'
+
+        return '<h1>Mã số thuế đã tồn tại</h1>'
 
     return render_template('register.html', form=form)
 
@@ -185,9 +191,24 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/thongke')
+@login_required
 def thongke():
     global taxrecords
     return render_template('thongke.html', taxrecords=taxrecords)
+
+@app.route('/download_excel')
+@login_required
+def download_excel():
+    global taxrecords
+    df = pd.DataFrame(taxrecords)
+    output = BytesIO()
+    writer = pd.ExcelWriter(output, engine='xlsxwriter')
+    df.to_excel(writer, sheet_name='Thống kê thuế', index=False)
+    writer.close()
+    output.seek(0)
+    today = datetime.today().strftime('%Y-%m-%d')
+    return send_file(output, download_name=f'Thong_ke_thue_{today}.xlsx', as_attachment=True)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

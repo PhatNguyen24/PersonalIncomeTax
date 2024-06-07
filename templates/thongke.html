@@ -24,7 +24,6 @@ Thống kê thuế
                     <th>Thời gian</th>
                     <th>Mã số thuế</th>
                     <th>Họ và tên</th>
-                    <!--  -->
                     <th>Mã tổ chức</th>
                     <th>Tên tổ chức</th>
                     <th>Thu nhập hàng tháng</th>
@@ -45,7 +44,6 @@ Thống kê thuế
                         <td>{{ record.codeorpay }}</td>
                         <td>{{ record.nameorpay }}</td>
                         <td>{{ record.gross }}</td>
-                        <!--  -->
                         <td>{{ record.codeorpay }}</td>
                         <td>{{ record.nameorpay }}</td>
                         <td>{{ record.gross }}</td>
@@ -62,7 +60,7 @@ Thống kê thuế
                 {% endfor %}
             </tbody>
         </table>
+        <a href="/download_excel" class="btn btn-success">Xuất file Excel</a>
     </div>
-    <input type="submit" value="submit">
 </div>
 {% endblock %}
